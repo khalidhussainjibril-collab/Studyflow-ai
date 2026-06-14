@@ -69,3 +69,36 @@ window.onload = () => {
   renderTasks();
   updateStats();
 };
+function sendMessage() {
+  let input = document.getElementById("chatInput");
+  let text = input.value;
+  if (!text) return;
+
+  let chatBox = document.getElementById("chatBox");
+
+  // User message
+  let userMsg = document.createElement("div");
+  userMsg.innerText = "You: " + text;
+  chatBox.appendChild(userMsg);
+
+  // Simple AI response (mock intelligence)
+  let botMsg = document.createElement("div");
+
+  let reply = "";
+
+  if (text.toLowerCase().includes("study")) {
+    reply = "Try using 25-minute focus sessions with short breaks.";
+  } else if (text.toLowerCase().includes("motivate")) {
+    reply = "Consistency beats motivation. Start small, stay steady.";
+  } else if (text.toLowerCase().includes("hello")) {
+    reply = "Hello 👋 I’m your Study assistant.";
+  } else {
+    reply = "I’m still learning. Try asking about study tips.";
+  }
+
+  botMsg.innerText = "AI: " + reply;
+  chatBox.appendChild(botMsg);
+
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
