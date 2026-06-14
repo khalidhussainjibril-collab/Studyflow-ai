@@ -48,16 +48,25 @@ const ADMIN_EMAIL = "khjibril28@gmail.com";
 ====================== */
 
 async function signup() {
+  console.log("Signup clicked");
+
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { error } = await supabase.auth.signUp({
+  console.log("Email:", email);
+  console.log("Password length:", password?.length);
+
+  const { data, error } = await supabase.auth.signUp({
     email,
     password
   });
 
+  console.log("Response:", data);
+  console.log("Error:", error);
+
   document.getElementById("status").innerText =
-    error ? error.message : "Signup successful. Check email or login.";
+    error ? error.message : "Signup sent!";
+}
 }
 
 /* ======================
