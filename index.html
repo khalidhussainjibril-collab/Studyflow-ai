@@ -115,6 +115,55 @@ async function logout() {
   document.getElementById("app").style.display = "none";
 }
 </script>
+<script>
+window.signup = async function () {
+  console.log("Signup clicked");
 
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  document.getElementById("status").innerText =
+    error ? error.message : "Signup sent!";
+};
+
+window.login = async function () {
+  console.log("Login clicked");
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById("status").innerText = error.message;
+    return;
+  }
+
+  document.getElementById("auth").style.display = "none";
+  document.getElementById("app").style.display = "block";
+
+  const ADMIN_EMAIL = "khjibril28@gmail.com";
+
+  const role = (email === ADMIN_EMAIL) ? "admin" : "user";
+
+  document.getElementById("role").innerText = "Role: " + role;
+};
+
+window.logout = async function () {
+  await supabase.auth.signOut();
+
+  document.getElementById("auth").style.display = "block";
+  document.getElementById("app").style.display = "none";
+};
+</script>
 </body>
 </html>
+
