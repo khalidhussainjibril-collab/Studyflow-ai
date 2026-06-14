@@ -8,14 +8,14 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       background: #0f172a;
       color: white;
-      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .card {
@@ -24,64 +24,39 @@
       border-radius: 12px;
       width: 320px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
-
-    h2 {
       text-align: center;
-      margin-bottom: 20px;
     }
 
     input {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
-      border: none;
       border-radius: 6px;
+      border: none;
     }
 
     button {
       width: 100%;
       padding: 10px;
-      margin-top: 10px;
+      margin-top: 8px;
       border: none;
       border-radius: 6px;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    .signup {
-      background: #22c55e;
-      color: white;
-    }
+    .signup { background: #22c55e; color: white; }
+    .login { background: #3b82f6; color: white; }
+    .logout { background: #ef4444; color: white; }
 
-    .login {
-      background: #3b82f6;
-      color: white;
-    }
-
-    .logout {
-      background: #ef4444;
-      color: white;
-    }
-
-    #app {
-      display: none;
-      text-align: center;
-    }
-
-    #status {
-      font-size: 12px;
-      margin-top: 8px;
-      text-align: center;
-      color: #cbd5e1;
-    }
+    #app { display: none; }
+    #status { font-size: 12px; margin-top: 8px; color: #cbd5e1; }
   </style>
 </head>
 
 <body>
 
 <div class="card" id="auth">
-
   <h2>StudyFlow AI</h2>
 
   <input id="email" placeholder="Email">
@@ -95,7 +70,6 @@
 
 <div class="card" id="app">
   <h2>Dashboard</h2>
-
   <h3 id="role"></h3>
 
   <button class="logout" onclick="logout()">Logout</button>
@@ -111,16 +85,23 @@ const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 const ADMIN_EMAIL = "khjibril28@gmail.com";
 
 window.signup = async function () {
+  alert("Signup clicked");
+
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { error } = await supabase.auth.signUp({ email, password });
+  const { error } = await supabase.auth.signUp({
+    email,
+    password
+  });
 
   document.getElementById("status").innerText =
-    error ? error.message : "Check email or login now";
+    error ? error.message : "Signup successful. Check email or login.";
 };
 
 window.login = async function () {
+  alert("Login clicked");
+
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
