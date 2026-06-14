@@ -1,5 +1,6 @@
 let timer;
-let timeLeft = 1500; // 25 minutes
+let timeLeft = 1500;
+let completedSessions = 0;
 
 function startTimer() {
   clearInterval(timer);
@@ -7,7 +8,10 @@ function startTimer() {
   timer = setInterval(() => {
     if (timeLeft <= 0) {
       clearInterval(timer);
-      alert("Focus session finished!");
+      completedSessions++;
+      localStorage.setItem("sessions", completedSessions);
+      updateStats();
+      alert("Focus session complete!");
       return;
     }
 
@@ -25,15 +29,43 @@ function resetTimer() {
 
 function addTask() {
   let task = document.getElementById("taskInput").value;
+  if (!task) return;
 
-  if (task === "") return;
+  let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+  tasks.push(task);
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 
-  let li = document.createElement("li");
-  li.innerText = task;
-
-  li.onclick = () => li.remove();
-
-  document.getElementById("taskList").appendChild(li);
-
+  renderTasks();
   document.getElementById("taskInput").value = "";
 }
+
+function renderTasks() {
+  let list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+
+  tasks.forEach((t, index) => {
+    let li = document.createElement("li");
+    li.innerText = t;
+
+    li.onclick = () => {
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      renderTasks();
+    };
+
+    list.appendChild(li);
+  });
+}
+
+function updateStats() {
+  document.getElementById("stats").innerText =
+    "Sessions Completed: " + (localStorage.getItem("sessions") || 0);
+}
+
+window.onload = () => {
+  completedSessions = Number(localStorage.getItem("sessions") || 0);
+  renderTasks();
+  updateStats();
+};
