@@ -1,54 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StudyFlow AI</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Test App</title>
 </head>
 
 <body>
 
-<div class="layout">
+<h2>Click Test System</h2>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>StudyFlow AI</h2>
-    <a href="index.html">🏠 Home</a>
-    <a href="app.html">📊 Dashboard</a>
-  </div>
+<input id="email" placeholder="email">
+<input id="password" placeholder="password">
 
-  <!-- Main -->
-  <div class="main">
+<button onclick="testClick()">Test Button</button>
 
-    <h1>Dashboard</h1>
+<p id="status"></p>
 
-    <div class="card">
-      <h2>⏱ Focus Timer</h2>
-      <h1 id="time">25:00</h1>
-      <button onclick="startTimer()">Start</button>
-      <button onclick="resetTimer()">Reset</button>
-      <p id="stats">Sessions Completed: 0</p>
-    </div>
-    <div class="card">
-  <h2>🧠 AI Assistant</h2>
-
-  <div id="chatBox" style="height:200px; overflow:auto; background:#0f172a; padding:10px; border-radius:8px;"></div>
-
-  <input id="chatInput" placeholder="Ask something..." />
-  <button onclick="sendMessage()">Send</button>
-</div>
-
-    <div class="card">
-      <h2>📝 Tasks</h2>
-      <input id="taskInput" placeholder="New task">
-      <button onclick="addTask()">Add</button>
-      <ul id="taskList"></ul>
-    </div>
-
-  </div>
-
-</div>
-
-<script src="script.js"></script>
+<script>
+function testClick() {
+  alert("BUTTON WORKS - JS IS RUNNING");
+  document.getElementById("status").innerText = "JS working fine";
+}
+</script>
 
 </body>
 </html>
