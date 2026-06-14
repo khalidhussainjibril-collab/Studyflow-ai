@@ -7,9 +7,9 @@
 
 <body>
 
-<div id="auth">
-  <h2>StudyFlow Login</h2>
+<h2>StudyFlow AI</h2>
 
+<div id="auth">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
 
@@ -30,11 +30,12 @@
 
 <script>
 /* =========================
-   SUPABASE SETUP
+   SUPABASE CONFIG
 ========================= */
 
 const supabaseUrl = "https://yidssmdknaaubtjmilrm.supabase.co";
-const supabaseKey = "sb_publishable_xDn0wAnacev-_qDGLMSHfg_7O4U-MgS";
+
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpZHNzbWRrbmFhdWJ0am1pbHJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NTU5MzksImV4cCI6MjA5NzAzMTkzOX0.S6EC_xUKmAulfWognx65pUZscEfaCEDJASGswJsNemk";
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
@@ -83,7 +84,7 @@ window.login = async function () {
 };
 
 /* =========================
-   USER HANDLING
+   USER HANDLER
 ========================= */
 
 function handleUser(user) {
