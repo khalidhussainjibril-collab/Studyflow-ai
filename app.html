@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>StudyFlow App</title>
+  <title>StudyFlow AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,11 +23,13 @@
   <button onclick="startTimer()">Start</button>
   <button onclick="resetTimer()">Reset</button>
 
-  <hr style="margin:40px 0;">
+  <h3 id="stats">Sessions Completed: 0</h3>
+
+  <hr>
 
   <h1>Tasks</h1>
 
-  <input id="taskInput" placeholder="Add a task">
+  <input id="taskInput" placeholder="Add task">
   <button onclick="addTask()">Add</button>
 
   <ul id="taskList"></ul>
