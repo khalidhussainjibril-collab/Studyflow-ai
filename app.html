@@ -16,12 +16,25 @@
 </nav>
 
 <div class="container">
-  <h1>Your Study Dashboard</h1>
 
-  <div class="card">📝 Task: Revise Chemistry</div>
-  <div class="card">⏳ Focus Session: 25 min</div>
-  <div class="card">🔥 Streak: 1 day</div>
+  <h1>Focus Timer</h1>
+  <h2 id="time">25:00</h2>
+
+  <button onclick="startTimer()">Start</button>
+  <button onclick="resetTimer()">Reset</button>
+
+  <hr style="margin:40px 0;">
+
+  <h1>Tasks</h1>
+
+  <input id="taskInput" placeholder="Add a task">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
