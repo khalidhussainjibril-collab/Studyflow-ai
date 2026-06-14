@@ -1,10 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>StudyFlow AI</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
 <div id="auth">
-  <h2>Login to StudyFlow AI</h2>
+  <h2>Login</h2>
 
-  <input id="email" placeholder="Email" />
-  <input id="password" type="password" placeholder="Password" />
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
 
-  <button onclick="signUp()">Sign Up</button>
+  <button onclick="signup()">Sign Up</button>
   <button onclick="login()">Login</button>
 
   <p id="status"></p>
@@ -13,47 +22,90 @@
 <hr>
 
 <div id="app" style="display:none;">
-  <h1>StudyFlow Dashboard</h1>
-  <button onclick="logout()">Logout</button>
-
+  <h1>Dashboard</h1>
   <h3 id="role"></h3>
+  <button onclick="logout()">Logout</button>
 </div>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>StudyFlow AI</title>
-  <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
+<script>
+/* ======================
+   SUPABASE SETUP (NEW KEY)
+====================== */
 
-<nav>
-  <div>StudyFlow AI</div>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="app.html">App</a>
-  </div>
-</nav>
+const supabaseUrl = "https://YOUR-PROJECT.supabase.co";
+const supabaseKey = "sb_publishable_Jrp5fALdn7gtwpHrT96UOQ_-SgWPmF";
 
-<div class="container">
-  <h1>StudyFlow AI</h1>
-  <p>Study smarter, not harder.</p>
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-  <div class="card">📚 Smart Planner</div>
-  <div class="card">⏱ Focus Timer</div>
-  <div class="card">🧠 AI Assistant (mock)</div>
-</div>
+/* ======================
+   ADMIN EMAIL
+====================== */
+
+const ADMIN_EMAIL = "khjibril28@gmail.com";
+
+/* ======================
+   SIGN UP
+====================== */
+
+async function signup() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { error } = await supabase.auth.signUp({
+    email,
+    password
+  });
+
+  document.getElementById("status").innerText =
+    error ? error.message : "Signup successful. Check email or login.";
+}
+
+/* ======================
+   LOGIN
+====================== */
+
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    document.getElementById("status").innerText = error.message;
+    return;
+  }
+
+  handleUser(data.user);
+}
+
+/* ======================
+   USER HANDLING
+====================== */
+
+function handleUser(user) {
+  document.getElementById("auth").style.display = "none";
+  document.getElementById("app").style.display = "block";
+
+  const role = (user.email === ADMIN_EMAIL) ? "admin" : "user";
+
+  document.getElementById("role").innerText =
+    "Role: " + role;
+}
+
+/* ======================
+   LOGOUT
+====================== */
+
+async function logout() {
+  await supabase.auth.signOut();
+
+  document.getElementById("auth").style.display = "block";
+  document.getElementById("app").style.display = "none";
+}
+</script>
 
 </body>
 </html>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-const supabaseUrl = "https://khalidhussainjibril-collab.github.io/Studyflow-ai/app.html;
-const supabaseKey = "sb_publishable_Jrp5fALdn7gtwpHrT96UOQ_-SgWPpmF;
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-</script>
-<script>
-alert("StudyFlow JS is running");
-</script>
