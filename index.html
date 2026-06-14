@@ -1,3 +1,23 @@
+<div id="auth">
+  <h2>Login to StudyFlow AI</h2>
+
+  <input id="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Password" />
+
+  <button onclick="signUp()">Sign Up</button>
+  <button onclick="login()">Login</button>
+
+  <p id="status"></p>
+</div>
+
+<hr>
+
+<div id="app" style="display:none;">
+  <h1>StudyFlow Dashboard</h1>
+  <button onclick="logout()">Logout</button>
+
+  <h3 id="role"></h3>
+</div>
 <!DOCTYPE html>
 <html>
 <head>
